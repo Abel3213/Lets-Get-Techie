@@ -14,41 +14,41 @@ router.get('/events', (req, res) => {
 });
 
 // to populate all posts on hompage
-router.get('/', (req, res) => {
-  console.log('======================');
-  Post.findAll({
-    attributes: [
-      'id',
-      'post_content',
-      'title',
-      'created_at',
-      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
-    ],
-    include: [
-      {
-        model: Comment,
-        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-        include: {
-          model: User,
-          attributes: ['user_name']
-        }
-      },
-      {
-        model: User,
-        attributes: ['user_name', 'user_name']
-      }
-    ]
-  })
-    .then(dbPostData => {
-      // serialize data before passing to template
-      const posts = dbPostData.map(post => post.get({ plain: true }));
-      res.render('homepage', { posts, loggedIn: req.session.loggedIn });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
-    });
-});
+// router.get('/', (req, res) => {
+//   console.log('======================');
+//   Post.findAll({
+//     attributes: [
+//       'id',
+//       'post_content',
+//       'title',
+//       'created_at',
+//       [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
+//     ],
+//     include: [
+//       {
+//         model: Comment,
+//         attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+//         include: {
+//           model: User,
+//           attributes: ['user_name']
+//         }
+//       },
+//       {
+//         model: User,
+//         attributes: ['user_name']
+//       }
+//     ]
+//   })
+//     .then(dbPostData => {
+//       // serialize data before passing to template
+//       const posts = dbPostData.map(post => post.get({ plain: true }));
+//       res.render('homepage', { posts, loggedIn: req.session.loggedIn });
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
+// });
 
 // to populate single post on post id 
 router.get('/post/:id', (req, res) => {
