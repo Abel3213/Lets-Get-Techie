@@ -1,0 +1,25 @@
+<div class="columns is-vcentered is-centered my-4">
+  <section class="section mx-6 mt-2">
+  <div class="column is-three-quarters tile is-ancestor has-background-info mx-6">
+    <!-- Single Post Listing -->
+    <div class="has-background-info-light ">
+    <h2 class="title is-1 has-text-centered "> YOUR DAILY TECHIE</h2>
+      {{#if posts.length}}
+      <section class="section my-4 mx-4">
+        <!--<h2 class="title is-2 has-text-centered">Your Posts</h2>-->
+        <ul>
+        {{#each posts as |post|}}
+          <li class="box">
+            {{> post-info post}}
+            <p>Comments</p>
+            {{> comments post.comments}}
+          </li>
+        {{/each}}
+      </ul>
+    </section>
+     {{/if}}
+    </div>
+  </div>
+  </section>
+
+

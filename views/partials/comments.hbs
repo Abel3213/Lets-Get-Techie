@@ -1,0 +1,13 @@
+
+<!-- used this to refer to parent object -->
+<div class="comments">
+  {{#each this}}
+  <div class="comment has-background-warning-light">
+    <div class="text has-text-weight-medium">
+      {{comment_text}}
+    </div>
+    <div class="meta">
+      From {{user.user_name}}
+    </div>
+  {{/each}}
+</div>
